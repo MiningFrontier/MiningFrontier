@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Metals Information Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        header {
+            background-color: #1a5276;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            margin: 0;
+        }
+        
+        .control-panel {
+            background-color: #2980b9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        select {
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .info-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .info-section {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #1a5276;
+            border-bottom: 2px solid #2980b9;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: #2980b9;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+        
+        @media (max-width: 768px) {
+            .info-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Interactive Metals Information Portal</h1>
+        <p>Select a metal to view detailed information about Earth resources and space mining potential</p>
+    </header>
+    
+    <div class="control-panel">
+        <label for="metal-select">Select a metal:</label>
+        <select id="metal-select">
+            <option value="">-- Please select a metal --</option>
+            <option value="aluminum">Aluminum</option>
+            <option value="antimony">Antimony</option>
+            <option value="beryllium">Beryllium</option>
+            <option value="cadmium">Cadmium</option>
+            <option value="chromium">Chromium</option>
+            <option value="cobalt">Cobalt</option>
+            <option value="copper">Copper</option>
+            <option value="gallium">Gallium</option>
+            <option value="germanium">Germanium</option>
+            <option value="gold">Gold</option>
+            <option value="indium">Indium</option>
+            <option value="iron">Iron</option>
+            <option value="lead">Lead</option>
+            <option value="lithium">Lithium</option>
+            <option value="magnesium">Magnesium</option>
+            <option value="manganese">Manganese</option>
+            <option value="mercury">Mercury</option>
+            <option value="molybdenum">Molybdenum</option>
+            <option value="nickel">Nickel</option>
+            <option value="niobium">Niobium</option>
+            <option value="palladium">Palladium</option>
+            <option value="platinum">Platinum</option>
+            <option value="rare-earths">Rare Earth Elements</option>
+            <option value="rhodium">Rhodium</option>
+            <option value="silver">Silver</option>
+            <option value="tantalum">Tantalum</option>
+            <option value="tin">Tin</option>
+            <option value="titanium">Titanium</option>
+            <option value="tungsten">Tungsten</option>
+            <option value="vanadium">Vanadium</option>
+            <option value="zinc">Zinc</option>
+            <option value="zirconium">Zirconium</option>
+        </select>
+    </div>
+    
+    <div class="info-container">
+        <div class="info-section" id="earth-resources">
+            <h2>Earth Resource Details</h2>
+            <div id="earth-resources-content">
+                <p>Please select a metal from the dropdown above to view information.</p>
+            </div>
+        </div>
+        
+        <div class="info-section" id="tech-advancements">
+            <h2>Technological Advancements</h2>
+            <div id="tech-advancements-content">
+                <p>Please select a metal from the dropdown above to view information.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="info-container">
+        <div class="info-section" id="mining-comparison">
+            <h2>Earth vs. Space Mining Comparison</h2>
+            <div id="mining-comparison-content">
+                <p>Please select a metal from the dropdown above to view information.</p>
+            </div>
+        </div>
+        
+        <div class="info-section" id="future-forecast">
+            <h2>Future Forecast</h2>
+            <div id="future-forecast-content">
+                <p>Please select a metal from the dropdown above to view information.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2025 Metals Information Portal. Data sourced from geological surveys and industry projections.</p>
+    </div>
+
+    <script>
+        // Metal data
+        const metalData = {
+            "aluminum": {
+                "name": "Aluminum",
+                "earthResources": {
+                    "estimatedReserves": 55000,
+                    "extractionCost": 1.75,
+                    "annualGrowth": 3.8,
+                    "depletionYear": 2130
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Improved Bayer process reducing energy consumption by 25%",
+                        "Red mud remediation techniques for lower environmental impact",
+                        "Direct electrolysis methods bypassing carbon anode consumption"
+                    ],
+                    "spaceMining": [
+                        "Lunar regolith processing for aluminum oxide extraction",
+                        "Asteroid processing facilities designed for anorthite-rich bodies",
+                        "Space-based solar power for energy-intensive refining"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 1.75,
+                    "spaceCost": 42.00,
+                    "breakEvenYear": 2065,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 4.1,
+                    "earthDepletion": 2130,
+                    "spaceNecessity": 2090,
+                    "notes": "Abundant on Earth but energy-intensive to extract; lunar resources potentially important for space construction"
+                }
+            },
+            "antimony": {
+                "name": "Antimony",
+                "earthResources": {
+                    "estimatedReserves": 2.0,
+                    "extractionCost": 6.80,
+                    "annualGrowth": 2.1,
+                    "depletionYear": 2043
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Improved flotation techniques increasing recovery rates",
+                        "Alternative leaching methods reducing mercury use",
+                        "Recycling from flame retardants and lead-acid batteries"
+                    ],
+                    "spaceMining": [
+                        "Spectral analysis of M-type asteroids for antimony content",
+                        "Preliminary extraction studies from chondrite meteorites",
+                        "Prototype microgravity smelting techniques in development"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 6.80,
+                    "spaceCost": 72.00,
+                    "breakEvenYear": 2052,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 3.5,
+                    "earthDepletion": 2043,
+                    "spaceNecessity": 2042,
+                    "notes": "Critical for flame retardants, batteries, and semiconductors; recycling expected to offset some demand"
+                }
+            },
+            "beryllium": {
+                "name": "Beryllium",
+                "earthResources": {
+                    "estimatedReserves": 0.4,
+                    "extractionCost": 625.00,
+                    "annualGrowth": 2.8,
+                    "depletionYear": 2048
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Advanced separation techniques for bertrandite ore",
+                        "Safer processing methods reducing worker exposure risks",
+                        "Improved recycling from electronic scrap"
+                    ],
+                    "spaceMining": [
+                        "Identification of beryllium-rich asteroids through spectroscopy",
+                        "Development of safer processing techniques in enclosed space environments",
+                        "Robotic mining systems for toxic material handling"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 625.00,
+                    "spaceCost": 1200.00,
+                    "breakEvenYear": 2049,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 3.2,
+                    "earthDepletion": 2048,
+                    "spaceNecessity": 2046,
+                    "notes": "Critical for aerospace, defense, and nuclear applications; high toxicity complicates extraction"
+                }
+            },
+            "cadmium": {
+                "name": "Cadmium",
+                "earthResources": {
+                    "estimatedReserves": 0.6,
+                    "extractionCost": 3.20,
+                    "annualGrowth": 0.5,
+                    "depletionYear": 2070
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Improved recovery from zinc processing",
+                        "Enhanced environmental controls reducing contamination",
+                        "Increased recycling from NiCd batteries"
+                    ],
+                    "spaceMining": [
+                        "Low priority for space mining due to toxicity concerns",
+                        "Automated handling systems for toxic materials in space",
+                        "Research into substitutes for space applications"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 3.20,
+                    "spaceCost": 95.00,
+                    "breakEvenYear": 2080,
+                    "viablePostDepletion": false
+                },
+                "futureForecast": {
+                    "consumptionRise": 0.3,
+                    "earthDepletion": 2070,
+                    "spaceNecessity": "N/A",
+                    "notes": "Declining use due to environmental regulations and substitution in batteries; not prioritized for space mining"
+                }
+            },
+            "chromium": {
+                "name": "Chromium",
+                "earthResources": {
+                    "estimatedReserves": 570,
+                    "extractionCost": 8.40,
+                    "annualGrowth": 3.1,
+                    "depletionYear": 2075
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "DC furnace technology reducing energy requirements",
+                        "Improved beneficiation techniques for low-grade ores",
+                        "Enhanced recovery from ferrochrome slag"
+                    ],
+                    "spaceMining": [
+                        "M-type asteroid characterization for chromium content",
+                        "Development of specialized extraction modules for space",
+                        "Research into chromium alloy production in microgravity"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 8.40,
+                    "spaceCost": 65.00,
+                    "breakEvenYear": 2055,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 3.8,
+                    "earthDepletion": 2075,
+                    "spaceNecessity": 2065,
+                    "notes": "Essential for stainless steel and superalloys; supply concentration in South Africa and Kazakhstan driving space alternatives"
+                }
+            },
+            "cobalt": {
+                "name": "Cobalt",
+                "earthResources": {
+                    "estimatedReserves": 7.1,
+                    "extractionCost": 33.00,
+                    "annualGrowth": 7.2,
+                    "depletionYear": 2042
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Advanced hydrometallurgical processes improving yields",
+                        "Responsible sourcing initiatives addressing ethical concerns",
+                        "Deep-sea nodule mining pilot projects"
+                    ],
+                    "spaceMining": [
+                        "Multiple asteroid mining ventures targeting cobalt-rich bodies",
+                        "Zero-gravity refining processes in development",
+                        "NASA-funded research into cobalt extraction from lunar regolith"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 33.00,
+                    "spaceCost": 62.00,
+                    "breakEvenYear": 2043,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 9.1,
+                    "earthDepletion": 2042,
+                    "spaceNecessity": 2040,
+                    "notes": "Critical for batteries and high-performance alloys; supply concentration and ethical issues driving space mining interest"
+                }
+            },
+            "copper": {
+                "name": "Copper",
+                "earthResources": {
+                    "estimatedReserves": 870,
+                    "extractionCost": 4.50,
+                    "annualGrowth": 2.3,
+                    "depletionYear": 2062
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Bio-leaching techniques reducing environmental impact",
+                        "AI-optimized extraction increasing yield by 15%",
+                        "Deep-sea nodule mining trials underway"
+                    ],
+                    "spaceMining": [
+                        "NASA's Psyche mission gathering data on metal-rich asteroids",
+                        "Prototype copper extraction modules in development for microgravity environments",
+                        "Lunar geological surveys identifying potential copper deposits"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 4.50,
+                    "spaceCost": 38.00,
+                    "breakEvenYear": 2048,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 2.7,
+                    "earthDepletion": 2062,
+                    "spaceNecessity": 2055,
+                    "notes": "Critical for renewable energy infrastructure and electric vehicles"
+                }
+            },
+            "gallium": {
+                "name": "Gallium",
+                "earthResources": {
+                    "estimatedReserves": 1.0,
+                    "extractionCost": 290.00,
+                    "annualGrowth": 8.4,
+                    "depletionYear": 2050
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Improved recovery from bauxite processing waste",
+                        "Enhanced extraction from zinc production",
+                        "Novel recycling techniques from semiconductor manufacturing"
+                    ],
+                    "spaceMining": [
+                        "Spectroscopic identification of gallium-rich asteroids",
+                        "Research into microgravity semiconductor manufacturing",
+                        "Space-based solar cell production facilities proposed"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 290.00,
+                    "spaceCost": 380.00,
+                    "breakEvenYear": 2048,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 11.2,
+                    "earthDepletion": 2050,
+                    "spaceNecessity": 2047,
+                    "notes": "Critical for semiconductors, LEDs, and solar technology; high growth rate driving early space mining development"
+                }
+            },
+            "germanium": {
+                "name": "Germanium",
+                "earthResources": {
+                    "estimatedReserves": 0.12,
+                    "extractionCost": 1800.00,
+                    "annualGrowth": 5.1,
+                    "depletionYear": 2038
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Advanced recovery from zinc ore processing",
+                        "Coal fly ash extraction methods improving yields",
+                        "Enhanced recycling from fiber optics and electronics"
+                    ],
+                    "spaceMining": [
+                        "Identification of germanium-rich asteroids through spectroscopy",
+                        "Development of space-based semiconductor manufacturing",
+                        "Research into germanium-based electronics for deep space missions"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 1800.00,
+                    "spaceCost": 2100.00,
+                    "breakEvenYear": 2037,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 6.8,
+                    "earthDepletion": 2038,
+                    "spaceNecessity": 2036,
+                    "notes": "Critical for fiber optics, infrared optics, and specialized semiconductors; early candidate for space mining due to high value"
+                }
+            },
+            "gold": {
+                "name": "Gold",
+                "earthResources": {
+                    "estimatedReserves": 0.054,
+                    "extractionCost": 45000.00,
+                    "annualGrowth": 1.8,
+                    "depletionYear": 2048
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Cyanide-free processing methods reducing environmental impact",
+                        "AI-driven exploration identifying new deep deposits",
+                        "Biomining technologies enhancing recovery from low-grade ores"
+                    ],
+                    "spaceMining": [
+                        "Multiple missions planned targeting gold-rich M-type asteroids",
+                        "Advanced spectrographic techniques for remote asteroid assessment",
+                        "Zero-gravity refining processes achieving 99.999% purity"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 45000.00,
+                    "spaceCost": 28000.00,
+                    "breakEvenYear": 2040,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 2.1,
+                    "earthDepletion": 2048,
+                    "spaceNecessity": 2042,
+                    "notes": "Early target for commercial space mining due to high value-to-weight ratio; major economic implications for gold markets"
+                }
+            },
+            "indium": {
+                "name": "Indium",
+                "earthResources": {
+                    "estimatedReserves": 0.05,
+                    "extractionCost": 310.00,
+                    "annualGrowth": 7.8,
+                    "depletionYear": 2036
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Improved recovery from zinc processing waste",
+                        "Novel extraction methods from tin mining byproducts",
+                        "Enhanced recycling techniques for flat panel displays"
+                    ],
+                    "spaceMining": [
+                        "Preliminary asteroid assessments for indium content",
+                        "Research into space-based display manufacturing",
+                        "Low-gravity processing methods for high-purity indium"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 310.00,
+                    "spaceCost": 390.00,
+                    "breakEvenYear": 2038,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 9.2,
+                    "earthDepletion": 2036,
+                    "spaceNecessity": 2034,
+                    "notes": "Critical for touchscreens and flat panel displays; rapid depletion making it an early space mining priority"
+                }
+            },
+            "iron": {
+                "name": "Iron",
+                "earthResources": {
+                    "estimatedReserves": 85000,
+                    "extractionCost": 0.08,
+                    "annualGrowth": 1.9,
+                    "depletionYear": 2140
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Hydrogen-based direct reduction eliminating coal requirement",
+                        "Automated sorting improving low-grade ore utilization",
+                        "Carbon capture integration reducing environmental impact"
+                    ],
+                    "spaceMining": [
+                        "Multiple M-type asteroid characterization missions",
+                        "In-situ manufacturing techniques for space structures",
+                        "Direct asteroid material utilization without Earth return"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 0.08,
+                    "spaceCost": 25.00,
+                    "breakEvenYear": 2080,
+                    "viablePostDepletion": false
+                },
+                "futureForecast": {
+                    "consumptionRise": 2.2,
+                    "earthDepletion": 2140,
+                    "spaceNecessity": "N/A",
+                    "notes": "Space mining focused on in-space use rather than Earth return; abundant in asteroids and lunar regolith"
+                }
+            },
+            "lead": {
+                "name": "Lead",
+                "earthResources": {
+                    "estimatedReserves": 88,
+                    "extractionCost": 2.10,
+                    "annualGrowth": 0.9,
+                    "depletionYear": 2075
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Enhanced battery recycling recovering 98% of lead content",
+                        "Improved smelting techniques reducing emissions",
+                        "Automated sorting of complex electronic waste"
+                    ],
+                    "spaceMining": [
+                        "Low priority for space mining due to toxicity and weight",
+                        "Research into substitutes for radiation shielding in space",
+                        "Limited asteroid sampling for lead content"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 2.10,
+                    "spaceCost": 70.00,
+                    "breakEvenYear": "N/A",
+                    "viablePostDepletion": false
+                },
+                "futureForecast": {
+                    "consumptionRise": 0.5,
+                    "earthDepletion": 2075,
+                    "spaceNecessity": "N/A",
+                    "notes": "Declining use due to environmental regulations; high recycling rates reducing primary demand"
+                }
+            },
+            "lithium": {
+                "name": "Lithium",
+                "earthResources": {
+                    "estimatedReserves": 22,
+                    "extractionCost": 5.80,
+                    "annualGrowth": 8.9,
+                    "depletionYear": 2045
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Direct lithium extraction (DLE) reducing water usage by 90%",
+                        "Enhanced geothermal brine extraction methods",
+                        "Clay deposit extraction becoming economically viable"
+                    ],
+                    "spaceMining": [
+                        "Lunar south pole exploration revealing lithium deposits",
+                        "Asteroid spectral analysis identifying lithium-rich bodies",
+                        "Low-gravity processing techniques in development"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 5.80,
+                    "spaceCost": 45.00,
+                    "breakEvenYear": 2040,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 12.3,
+                    "earthDepletion": 2045,
+                    "spaceNecessity": 2041,
+                    "notes": "Battery technology advances may reduce dependency, but remains critical for energy storage"
+                }
+            },
+            "magnesium": {
+                "name": "Magnesium",
+                "earthResources": {
+                    "estimatedReserves": 12000,
+                    "extractionCost": 2.40,
+                    "annualGrowth": 3.6,
+                    "depletionYear": 2120
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Energy-efficient electrolytic processes reducing costs",
+                        "Seawater extraction methods becoming economically viable",
+                        "Enhanced recycling from automotive and aerospace components"
+                    ],
+                    "spaceMining": [
+                        "Abundant in lunar regolith with extraction methods in development",
+                        "Key target for in-space manufacturing due to lightweight properties",
+                        "Asteroid mining focused on magnesium-silicate rich bodies"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 2.40,
+                    "spaceCost": 38.00,
+                    "breakEvenYear": 2070,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 4.2,
+                    "earthDepletion": 2120,
+                    "spaceNecessity": 2090,
+                    "notes": "Critical for lightweight alloys in aerospace and automotive applications; abundant in both Earth and space"
+                }
+            },
+            "manganese": {
+                "name": "Manganese",
+                "earthResources": {
+                    "estimatedReserves": 1300,
+                    "extractionCost": 2.15,
+                    "annualGrowth": 2.7,
+                    "depletionYear": 2085
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Improved hydrometallurgical processing reducing energy requirements",
+                        "Deep-sea nodule mining pilots targeting manganese-rich areas",
+                        "Enhanced electrolytic manganese production methods"
+                    ],
+                    "spaceMining": [
+                        "Lunar regolith processing targeting manganese oxides",
+                        "Asteroid prospecting revealing manganese concentrations",
+                        "Space-based battery manufacturing research"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 2.15,
+                    "spaceCost": 45.00,
+                    "breakEvenYear": 2060,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 3.1,
+                    "earthDepletion": 2085,
+                    "spaceNecessity": 2075,
+                    "notes": "Essential for steel production and emerging battery technologies; deep-sea resources may extend Earth supplies"
+                }
+            },
+            "mercury": {
+                "name": "Mercury",
+                "earthResources": {
+                    "estimatedReserves": 0.6,
+                    "extractionCost": 35.00,
+                    "annualGrowth": -5.2,
+                    "depletionYear": "N/A"
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Focus on safer handling and processing methods",
+                        "Enhanced recycling from industrial and medical waste",
+                        "Remediation technologies for contaminated sites"
+                    ],
+                    "spaceMining": [
+                        "No active space mining initiatives due to toxicity concerns",
+                        "Research focused on substitutes for historical mercury applications",
+                        "Specialized containment systems for potential scientific use"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 35.00,
+                    "spaceCost": "N/A",
+                    "breakEvenYear": "N/A",
+                    "viablePostDepletion": "N/A"
+                },
+                "futureForecast": {
+                    "consumptionRise": -7.8,
+                    "earthDepletion": "N/A",
+                    "spaceNecessity": "N/A",
+                    "notes": "Global phase-out due to toxicity concerns; focus on substitutes and safe disposal rather than new production"
+                }
+            },
+            "molybdenum": {
+                "name": "Molybdenum",
+                "earthResources": {
+                    "estimatedReserves": 16,
+                    "extractionCost": 24.50,
+                    "annualGrowth": 3.1,
+                    "depletionYear": 2052
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Advanced flotation techniques improving recovery from low-grade ores",
+                        "Enhanced processing of molybdenum from copper mining byproducts",
+                        "Improved recycling from high-performance steel alloys"
+                    ],
+                    "spaceMining": [
+                        "Identification of molybdenum in M-type asteroids",
+                        "Research into space manufacturing of high-temperature alloys",
+                        "Extraction methods compatible with microgravity environments"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 24.50,
+                    "spaceCost": 85.00,
+                    "breakEvenYear": 2055,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 3.8,
+                    "earthDepletion": 2052,
+                    "spaceNecessity": 2050,
+                    "notes": "Critical for high-strength steel alloys and high-temperature applications; essential for space infrastructure"
+                }
+            },
+            "nickel": {
+                "name": "Nickel",
+                "earthResources": {
+                    "estimatedReserves": 95,
+                    "extractionCost": 12.70,
+                    "annualGrowth": 4.1,
+                    "depletionYear": 2056
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "High-pressure acid leaching improving yields from laterite ores",
+                        "Electrowinning advances reducing energy requirements by 25%",
+                        "Underwater exploration of seafloor massive sulfides"
+                    ],
+                    "spaceMining": [
+                        "M-type asteroid characterization missions planned",
+                        "SpaceX-funded nickel extraction prototype testing in vacuum conditions",
+                        "Potential nickel resources in lunar regolith being quantified"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 12.70,
+                    "spaceCost": 58.00,
+                    "breakEvenYear": 2047,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 5.8,
+                    "earthDepletion": 2056,
+                    "spaceNecessity": 2052,
+                    "notes": "Essential for stainless steel and electric vehicle batteries"
+                }
+            },
+            "niobium": {
+                "name": "Niobium",
+                "earthResources": {
+                    "estimatedReserves": 9,
+                    "extractionCost": 45.00,
+                    "annualGrowth": 5.2,
+                    "depletionYear": 2055
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Enhanced extraction from pyrochlore concentrates",
+                        "Advanced processing reducing acid consumption",
+                        "Recycling initiatives from superalloy scrap"
+                    ],
+                    "spaceMining": [
+                        "Spectroscopic identification of niobium-rich asteroids",
+                        "Space manufacturing research for superconducting materials",
+                        "Extraction processes for microgravity environments"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 45.00,
+                    "spaceCost": 120.00,
+                    "breakEvenYear": 2053,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 6.1,
+                    "earthDepletion": 2055,
+                    "spaceNecessity": 2053,
+                    "notes": "Critical for superalloys, superconductors, and specialized steel; limited terrestrial sources driving space interest"
+                }
+            },
+            "palladium": {
+                "name": "Palladium",
+                "earthResources": {
+                    "estimatedReserves": 0.0069,
+                    "extractionCost": 25000.00,
+                    "annualGrowth": 4.8,
+                    "depletionYear": 2038
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Enhanced recovery from nickel and copper mining byproducts",
+                        "Deep mining technologies reaching new PGM deposits",
+                        "Advanced recycling from automotive catalytic converters"
+                    ],
+                    "spaceMining": [
+                        "Multiple missions targeting platinum group metal-rich asteroids",
+                        "Specialized extraction techniques for microgravity processing",
+                        "Research into palladium-based catalyst production in space"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 25000.00,
+                    "spaceCost": 17000.00,
+                    "breakEvenYear": 2036,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 5.9,
+                    "earthDepletion": 2038,
+                    "spaceNecessity": 2036,
+                    "notes": "Early target for commercial space mining due to high value and terrestrial scarcity; critical for catalysts and electronics"
+                }
+            },
+            "platinum": {
+                "name": "Platinum",
+                "earthResources": {
+                    "estimatedReserves": 0.069,
+                    "extractionCost": 30000.00,
+                    "annualGrowth": 3.2,
+                    "depletionYear": 2040
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Ultra-deep mining techniques reaching 4km below surface",
+                        "Secondary recovery from tailings increasing total yield by 8%",
+                        "Advanced froth flotation improving separation efficiency"
+                    ],
+                    "spaceMining": [
+                        "Multiple missions targeting platinum-rich M-type asteroids",
+                        "Prototype in-situ platinum extraction technology successfully tested",
+                        "Lunar PGM (Platinum Group Metals) deposits identified in impact craters"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 30000.00,
+                    "spaceCost": 18000.00,
+                    "breakEvenYear": 2035,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 5.1,
+                    "earthDepletion": 2040,
+                    "spaceNecessity": 2036,
+                    "notes": "First economically viable space mining target due to high value and terrestrial scarcity"
+                }
+            },
+            "rare-earths": {
+                "name": "Rare Earth Elements",
+                "earthResources": {
+                    "estimatedReserves": 120,
+                    "extractionCost": 160.00,
+                    "annualGrowth": 7.5,
+                    "depletionYear": 2082
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Ionic adsorption clay processing with reduced environmental impact",
+                        "Recycling technologies recovering 85% from electronic waste",
+                        "Monazite sand processing improvements"
+                    ],
+                    "spaceMining": [
+                        "Lunar KREEP terrain identified as rare earth-rich region",
+                        "Asteroid sampling missions including REE analysis objectives",
+                        "Novel separation techniques for microgravity environments"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 160.00,
+                    "spaceCost": 225.00,
+                    "breakEvenYear": 2045,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 8.9,
+                    "earthDepletion": 2082,
+                    "spaceNecessity": 2060,
+                    "notes": "Critical for magnets, electronics, and defense applications"
+                }
+            },
+            "rhodium": {
+                "name": "Rhodium",
+                "earthResources": {
+                    "estimatedReserves": 0.003,
+                    "extractionCost": 178000.00,
+                    "annualGrowth": 3.6,
+                    "depletionYear": 2037
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Enhanced recovery from PGM mining concentrates",
+                        "Ultra-deep mining technologies accessing new reserves",
+                        "Advanced recycling from automotive catalytic converters"
+                    ],
+                    "spaceMining": [
+                        "Multiple asteroid missions targeting rhodium-rich bodies",
+                        "High-precision spectroscopy methods for asteroid assessment",
+                        "Microgravity purification techniques achieving 99.999% purity"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 178000.00,
+                    "spaceCost": 85000.00,
+                    "breakEvenYear": 2034,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 4.8,
+                    "earthDepletion": 2037,
+                    "spaceNecessity": 2033,
+                    "notes": "Highest-priority space mining target due to extreme terrestrial scarcity and high value; critical for catalysts"
+                }
+            },
+            "silver": {
+                "name": "Silver",
+                "earthResources": {
+                    "estimatedReserves": 0.53,
+                    "extractionCost": 560.00,
+                    "annualGrowth": 2.4,
+                    "depletionYear": 2047
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Enhanced recovery from lead-zinc mining byproducts",
+                        "Advanced leaching techniques reducing cyanide use",
+                        "Improved recycling from electronic and photographic waste"
+                    ],
+                    "spaceMining": [
+                        "Multiple asteroid missions identifying silver content",
+                        "Space-based manufacturing of high-efficiency solar cells",
+                        "Microgravity processing for ultra-pure silver conductors"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 560.00,
+                    "spaceCost": 950.00,
+                    "breakEvenYear": 2048,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 3.2,
+                    "earthDepletion": 2047,
+                    "spaceNecessity": 2045,
+                    "notes": "Critical for electronics, solar panels, and medical applications; growing industrial demand driving space mining interest"
+                }
+            },
+            "tantalum": {
+                "name": "Tantalum",
+                "earthResources": {
+                    "estimatedReserves": 0.11,
+                    "extractionCost": 290.00,
+                    "annualGrowth": 4.7,
+                    "depletionYear": 2039
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Ethical sourcing initiatives addressing conflict mineral concerns",
+                        "Enhanced extraction from tin mining byproducts",
+                        "Improved processing of low-grade tantalite ores"
+                    ],
+                    "spaceMining": [
+                        "Asteroid spectroscopy identifying tantalum-niobium concentrations",
+                        "Space-based capacitor manufacturing research",
+                        "Zero-gravity processing techniques for high-purity tantalum"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 290.00,
+                    "spaceCost": 450.00,
+                    "breakEvenYear": 2042,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 5.9,
+                    "earthDepletion": 2039,
+                    "spaceNecessity": 2037,
+                    "notes": "Critical for electronics capacitors and superalloys; ethical supply chain concerns driving space alternatives"
+                }
+            },
+            "tin": {
+                "name": "Tin",
+                "earthResources": {
+                    "estimatedReserves": 4.9,
+                    "extractionCost": 19.30,
+                    "annualGrowth": 2.1,
+                    "depletionYear": 2050
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Enhanced gravity separation techniques for alluvial deposits",
+                        "Improved flotation methods for complex ores",
+                        "Advanced recycling from electronics and soldering waste"
+                    ],
+                    "spaceMining": [
+                        "Limited asteroid exploration for tin content",
+                        "Research into alternatives for space electronics manufacturing",
+                        "Medium-priority for space mining initiatives"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 19.30,
+                    "spaceCost": 85.00,
+                    "breakEvenYear": 2055,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 2.6,
+                    "earthDepletion": 2050,
+                    "spaceNecessity": 2048,
+                    "notes": "Important for electronics soldering and specialty chemicals; recycling expected to offset some primary demand"
+                }
+            },
+            "titanium": {
+                "name": "Titanium",
+                "earthResources": {
+                    "estimatedReserves": 750,
+                    "extractionCost": 9.60,
+                    "annualGrowth": 3.8,
+                    "depletionYear": 2095
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Improved Kroll process reducing energy requirements",
+                        "Direct electrochemical reduction methods in development",
+                        "Enhanced ilmenite and rutile processing techniques"
+                    ],
+                    "spaceMining": [
+                        "Abundant in lunar regolith with extraction methods in development",
+                        "Key target for in-space manufacturing of structures",
+                        "Multiple asteroid mining initiatives targeting titanium-rich bodies"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 9.60,
+                    "spaceCost": 28.00,
+                    "breakEvenYear": 2050,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 4.5,
+                    "earthDepletion": 2095,
+                    "spaceNecessity": 2075,
+                    "notes": "Critical for aerospace, medical implants, and desalination; abundant in lunar regolith making it priority for space construction"
+                }
+            },
+            "tungsten": {
+                "name": "Tungsten",
+                "earthResources": {
+                    "estimatedReserves": 3.2,
+                    "extractionCost": 32.50,
+                    "annualGrowth": 2.3,
+                    "depletionYear": 2055
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Improved gravity separation for scheelite and wolframite",
+                        "Advanced hydrometallurgical processing reducing environmental impact",
+                        "Enhanced recycling from carbide tools and mining equipment"
+                    ],
+                    "spaceMining": [
+                        "Asteroid spectroscopy identifying tungsten concentrations",
+                        "Research into space-based manufacturing of high-density components",
+                        "Microgravity processing methods for tungsten-based alloys"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 32.50,
+                    "spaceCost": 110.00,
+                    "breakEvenYear": 2058,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 2.8,
+                    "earthDepletion": 2055,
+                    "spaceNecessity": 2052,
+                    "notes": "Critical for high-temperature applications, lighting, and armaments; limited terrestrial sources driving space mining interest"
+                }
+            },
+            "vanadium": {
+                "name": "Vanadium",
+                "earthResources": {
+                    "estimatedReserves": 20,
+                    "extractionCost": 28.00,
+                    "annualGrowth": 4.2,
+                    "depletionYear": 2060
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Enhanced salt roasting and leaching processes",
+                        "Recovery from petroleum residues and fly ash",
+                        "Advanced extraction from titaniferous magnetite"
+                    ],
+                    "spaceMining": [
+                        "Identification of vanadium in certain asteroid types",
+                        "Space-based research into vanadium redox flow batteries",
+                        "Microgravity processing for high-purity vanadium alloys"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 28.00,
+                    "spaceCost": 95.00,
+                    "breakEvenYear": 2059,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 5.1,
+                    "earthDepletion": 2060,
+                    "spaceNecessity": 2057,
+                    "notes": "Critical for high-strength steel alloys and emerging battery technologies; growing energy storage applications driving demand"
+                }
+            },
+            "zinc": {
+                "name": "Zinc",
+                "earthResources": {
+                    "estimatedReserves": 230,
+                    "extractionCost": 2.30,
+                    "annualGrowth": 2.1,
+                    "depletionYear": 2068
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Improved hydrometallurgical processing reducing energy requirements",
+                        "Enhanced electrolytic processes with lower environmental impact",
+                        "Advanced recycling from galvanized steel and brass"
+                    ],
+                    "spaceMining": [
+                        "Limited asteroid exploration for zinc content",
+                        "Research into corrosion-resistant coatings for space structures",
+                        "Medium-priority for space mining initiatives"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 2.30,
+                    "spaceCost": 65.00,
+                    "breakEvenYear": 2065,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 2.5,
+                    "earthDepletion": 2068,
+                    "spaceNecessity": 2065,
+                    "notes": "Important for galvanizing, alloys, and batteries; recycling expected to extend terrestrial reserves"
+                }
+            },
+            "zirconium": {
+                "name": "Zirconium",
+                "earthResources": {
+                    "estimatedReserves": 60,
+                    "extractionCost": 35.00,
+                    "annualGrowth": 3.2,
+                    "depletionYear": 2080
+                },
+                "techAdvancements": {
+                    "earthMining": [
+                        "Enhanced gravity and electrostatic separation techniques",
+                        "Improved processing of zircon sands",
+                        "Advanced nuclear-grade purification methods"
+                    ],
+                    "spaceMining": [
+                        "Limited lunar exploration for zirconium content",
+                        "Research into space-based nuclear applications",
+                        "Medium-priority for space mining initiatives"
+                    ]
+                },
+                "miningComparison": {
+                    "earthCost": 35.00,
+                    "spaceCost": 110.00,
+                    "breakEvenYear": 2070,
+                    "viablePostDepletion": true
+                },
+                "futureForecast": {
+                    "consumptionRise": 3.8,
+                    "earthDepletion": 2080,
+                    "spaceNecessity": 2075,
+                    "notes": "Critical for nuclear applications, ceramics, and foundry sands; growing nuclear industry driving long-term demand"
+                }
+            }
+        };
+
+        // Function to update content based on metal selection
+        function updateContent(metalKey) {
+            if (!metalKey) {
+                document.getElementById('earth-resources-content').innerHTML = '<p>Please select a metal from the dropdown above to view information.</p>';
+                document.getElementById('tech-advancements-content').innerHTML = '<p>Please select a metal from the dropdown above to view information.</p>';
+                document.getElementById('mining-comparison-content').innerHTML = '<p>Please select a metal from the dropdown above to view information.</p>';
+                document.getElementById('future-forecast-content').innerHTML = '<p>Please select a metal from the dropdown above to view information.</p>';
+                return;
+            }
+            
+            const metal = metalData[metalKey];
+            
+            // Update Earth Resources
+            document.getElementById('earth-resources-content').innerHTML = `
+                <h3>${metal.name} Earth Resources</h3>
+                <table>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>Estimated Reserves</td>
+                        <td>${metal.earthResources.estimatedReserves} million tonnes</td>
+                    </tr>
+                    <tr>
+                        <td>Cost of Extraction</td>
+                        <td>$${metal.earthResources.extractionCost.toFixed(2)}/kg</td>
+                    </tr>
+                    <tr>
+                        <td>Annual Growth in Consumption</td>
+                        <td>${metal.earthResources.annualGrowth}%</td>
+                    </tr>
+                    <tr>
+                        <td>Estimated Depletion Year</td>
+                        <td class="highlight">${metal.earthResources.depletionYear}</td>
+                    </tr>
+                </table>
+            `;
+            
+            // Update Technological Advancements
+            let techContent = `<h3>${metal.name} Mining Innovations</h3>`;
+            
+            techContent += `<h4>Earth-based Mining</h4><ul>`;
+            metal.techAdvancements.earthMining.forEach(item => {
+                techContent += `<li>${item}</li>`;
+            });
+            techContent += `</ul>`;
+            
+            techContent += `<h4>Space/Asteroid/Lunar Mining</h4><ul>`;
+            metal.techAdvancements.spaceMining.forEach(item => {
+                techContent += `<li>${item}</li>`;
+            });
+            techContent += `</ul>`;
+            
+            document.getElementById('tech-advancements-content').innerHTML = techContent;
+            
+            // Update Mining Comparison
+            document.getElementById('mining-comparison-content').innerHTML = `
+                <h3>${metal.name} Mining Cost Comparison</h3>
+                <table>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>Earth Mining Cost</td>
+                        <td>$${metal.miningComparison.earthCost.toFixed(2)}/kg</td>
+                    </tr>
+                    <tr>
+                        <td>Space Mining Cost</td>
+                        <td>$${metal.miningComparison.spaceCost.toFixed(2)}/kg</td>
+                    </tr>
+                    <tr>
+                        <td>Breakeven Year</td>
+                        <td class="highlight">${metal.miningComparison.breakEvenYear}</td>
+                    </tr>
+                    <tr>
+                        <td>Viable Post-Earth Depletion</td>
+                        <td>${metal.miningComparison.viablePostDepletion ? "Yes" : "No"}</td>
+                    </tr>
+                </table>
+            `;
+            
+            // Update Future Forecast
+            document.getElementById('future-forecast-content').innerHTML = `
+                <h3>${metal.name} Future Outlook</h3>
+                <table>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>Predicted Rise in Consumption</td>
+                        <td>${metal.futureForecast.consumptionRise}% annually</td>
+                    </tr>
+                    <tr>
+                        <td>Earth Depletion Projection</td>
+                        <td class="highlight">${metal.futureForecast.earthDepletion}</td>
+                    </tr>
+                    <tr>
+                        <td>Space Mining Necessity</td>
+                        <td class="highlight">${metal.futureForecast.spaceNecessity}</td>
+                    </tr>
+                </table>
+                <p><strong>Notes:</strong> ${metal.futureForecast.notes}</p>
+            `;
+        }
+        
+        // Event listener for dropdown
+        document.getElementById('metal-select').addEventListener('change', function() {
+            updateContent(this.value);
+        });
+    </script>
+</body>
+</html>
